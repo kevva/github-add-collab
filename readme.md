@@ -60,6 +60,24 @@ Type: `function`
 
 Returns an error if something goes wrong.
 
+## CLI
+
+```sh
+$ npm install --global github-add-collab
+```
+
+```sh
+$ github-add-collab --help
+
+Usage
+  $ github-add-collab <owner> <collaborator> <space separated repos>
+  $ github-repos sindresorhus tunnckoCore meow chalk
+  $ github-repos sindresorhus tunnckoCore meow chalk --token 523ef69119eadg12
+
+Options
+  -t, --token    Github token to authenticate with
+```
+
 ## License
 
 MIT © [Kevin Mårtensson](https://github.com/kevva)
