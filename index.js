@@ -69,8 +69,9 @@ module.exports = function (user, repos, opts, cb) {
 
 	opts.headers = {
 		Accept: 'application/vnd.github.v3+json',
-		Authorization:'token ' + opts.token,
-		'Content-Length': 0
+		Authorization: 'token ' + opts.token,
+		'Content-Length': 0,
+		'User-Agent': 'https://github.com/kevva/github-add-collab'
 	};
 
 	githubTokenUser(opts.token, function (err, data) {
