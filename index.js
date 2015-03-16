@@ -78,7 +78,7 @@ module.exports = function (user, repos, opts, cb) {
 		var username = data.login;
 
 		if (!repos.length && opts.addToAll) {
-			getRepos(username, user, opts, cb);
+			getRepos(user, username, opts, cb);
 			return;
 		}
 
