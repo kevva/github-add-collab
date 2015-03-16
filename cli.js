@@ -30,6 +30,11 @@ var cli = meow({
 var user = cli.input.shift();
 var repos = cli.input;
 
+if (!user) {
+	console.error('User required');
+	process.exit(1);
+}
+
 githubAddCollab(user, repos, cli.flags, function (err, data) {
 	if (err) {
 		console.error(err.message);

@@ -51,6 +51,10 @@ function getRepos(user, login, opts, cb) {
 }
 
 module.exports = function (user, repos, opts, cb) {
+	if (typeof user !== 'string') {
+		throw new Error('User required');
+	}
+
 	if (!cb && typeof repos === 'object') {
 		cb = opts;
 		opts = repos;
