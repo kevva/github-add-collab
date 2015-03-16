@@ -14,14 +14,16 @@ var cli = meow({
 		'  $ github-add-collab johndoe --add-to-all --token 523ef69119',
 		'Options',
 		'  -a, --add-to-all    Add to all repositories',
-		'  -t, --token         Github token to authenticate with'
+		'  -t, --token         Github token to authenticate with',
+		'  -v, --verbose       Show detailed output'
 	].join('\n')
 }, {
-	boolean: ['add-to-all'],
+	boolean: ['add-to-all', 'verbose'],
 	string: ['token'],
 	alias: {
 		a: 'add-to-all',
-		t: 'token'
+		t: 'token',
+		v: 'verbose'
 	}
 });
 
@@ -35,4 +37,12 @@ githubAddCollab(user, repos, cli.flags, function (err, data) {
 	}
 
 	console.log('Added user ' + user + ' to ' + data.length + ' repositories');
+
+	if (cli.flags.verbose) {
+		console.log();
+
+		data.forEach(function (el) {
+			console.log(el);
+		});
+	}
 });

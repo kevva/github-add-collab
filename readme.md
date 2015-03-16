@@ -76,6 +76,7 @@ Usage
   Options
     -a, --add-to-all    Add to all repositories
     -t, --token         Github token to authenticate with
+    -v, --verbose       Show detailed output
 ```
 
 ## License
