@@ -13,15 +13,14 @@ $ npm install --save github-add-collab
 ```js
 var githubAddCollab = require('github-add-collab');
 
-githubAddCollab('johndoe', ['github-add-collab'], {
-	owner: 'kevva',
+githubAddCollab('johndoe', ['github-add-collab', 'yeoman/yo'], {
 	token: '523ef691191'
-} function (err, data) {
+}, function (err, data) {
 	if (err) {
 		throw err;
 	}
 
-	console.log('Successfully added user johndoe to github-add-collab');
+	console.log('Successfully added user johndoe to github-add-collab and yeoman/yo');
 });
 ```
 
@@ -41,12 +40,6 @@ Type: `array`
 
 Repos to add the collaborator to. If no repos are defined it'll add the user to 
 all repositories owned by `opts.owner`.
-
-#### opts.owner
-
-Type: `string`
-
-Repository owner username.
 
 #### opts.token
 

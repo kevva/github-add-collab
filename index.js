@@ -1,13 +1,14 @@
 'use strict';
 
 var githubRepos = require('github-repositories');
+var githubTokenUser = require('github-token-user');
 var got = require('got');
 var eachAsync = require('each-async');
 
 function addCollab(user, repo, opts, cb) {
 	var url = [
-		'https://api.github.com/repos/' + opts.owner + '/',
-		repo + '/collaborators/' + user
+		'https://api.github.com/repos/' + repo + '/',
+		'collaborators/' + user
 	].join('');
 
 	got.put(url, {headers: opts.headers}, function (err) {
@@ -17,6 +18,34 @@ function addCollab(user, repo, opts, cb) {
 		}
 
 		cb();
+	});
+}
+
+function run(user, repos, opts, cb) {
+	eachAsync(repos, function (repo, i, next) {
+		addCollab(user, repo, opts, next);
+	}, function (err) {
+		if (err) {
+			cb(err);
+			return;
+		}
+
+		cb();
+	});
+}
+
+function getRepos(user, login, opts, cb) {
+	githubRepos(login, {token: opts.token}, function (err, data) {
+		if (err) {
+			cb(err);
+			return;
+		}
+
+		data = data.map(function (el) {
+			return el.full_name;
+		});
+
+		run(user, data, opts, cb);
 	});
 }
 
@@ -37,36 +66,24 @@ module.exports = function (user, repos, opts, cb) {
 		throw new Error('Token is required to authenticate with Github');
 	}
 
-	if (!opts.owner) {
-		throw new Error('Owner is required');
-	}
-
 	opts.headers = {
 		Accept: 'application/vnd.github.v3+json',
 		Authorization:'token ' + opts.token,
 		'Content-Length': 0
 	};
 
-	githubRepos(opts.owner, {token: opts.token}, function (err, data) {
-		if (err) {
-			cb(err);
+	githubTokenUser(opts.token, function (err, data) {
+		var username = data.login;
+
+		if (!repos.length && opts.addToAll) {
+			getRepos(username, user, opts, cb);
 			return;
 		}
 
-		eachAsync(data, function (repo, i, next) {
-			if (repos.length && repos.indexOf(repo.name) === -1) {
-				next();
-				return;
-			}
-
-			addCollab(user, repo.name, opts, next);
-		}, function (err) {
-			if (err) {
-				cb(err);
-				return;
-			}
-
-			cb();
+		repos = repos.map(function (repo) {
+			return repo.split('/')[1] ? repo : username + '/' + repo;
 		});
+
+		run(user, repos, opts, cb);
 	});
 };

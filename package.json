@@ -33,6 +33,7 @@
   "dependencies": {
     "each-async": "^1.1.1",
     "github-repositories": "^1.1.0",
+    "github-token-user": "^1.0.0",
     "got": "^2.4.0"
   },
   "devDependencies": {
