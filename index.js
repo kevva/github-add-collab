@@ -30,7 +30,7 @@ function run(user, repos, opts, cb) {
 			return;
 		}
 
-		cb();
+		cb(null, repos);
 	});
 }
 
