@@ -4,6 +4,7 @@ var githubRepos = require('github-repositories');
 var githubTokenUser = require('github-token-user');
 var got = require('got');
 var eachAsync = require('each-async');
+var objectAssign = require('object-assign');
 
 function addCollab(user, repo, opts, cb) {
 	var url = [
@@ -50,8 +51,6 @@ function getRepos(user, login, opts, cb) {
 }
 
 module.exports = function (user, repos, opts, cb) {
-	opts = opts || {};
-
 	if (!cb && typeof repos === 'object') {
 		cb = opts;
 		opts = repos;
@@ -65,6 +64,8 @@ module.exports = function (user, repos, opts, cb) {
 	if (!opts.token) {
 		throw new Error('Token is required to authenticate with Github');
 	}
+
+	opts = objectAssign({}, opts);
 
 	opts.headers = {
 		Accept: 'application/vnd.github.v3+json',
