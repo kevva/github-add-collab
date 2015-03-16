@@ -12,6 +12,7 @@ var cli = meow({
 		'Example',
 		'  $ github-add-collab johndoe github-add-collab yeoman/yo --token 523ef69119',
 		'  $ github-add-collab johndoe --add-to-all --token 523ef69119',
+		'',
 		'Options',
 		'  -a, --add-to-all    Add to all repositories',
 		'  -t, --token         Github token to authenticate with',

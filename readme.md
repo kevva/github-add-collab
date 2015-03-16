@@ -1,6 +1,6 @@
 # github-add-collab [![Build Status](http://img.shields.io/travis/kevva/github-add-collab.svg?style=flat)](https://travis-ci.org/kevva/github-add-collab)
 
-> Add collaborators to Github repos
+> Add collaborators to GitHub repos
 
 
 ## Install
@@ -75,6 +75,7 @@ $ github-add-collab --help
   Example
     $ github-add-collab johndoe github-add-collab yeoman/yo --token 523ef69119
     $ github-add-collab johndoe --add-to-all --token 523ef69119
+
   Options
     -a, --add-to-all    Add to all repositories
     -t, --token         Github token to authenticate with
