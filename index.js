@@ -70,7 +70,6 @@ module.exports = function (user, repos, opts, cb) {
 	}
 
 	opts = objectAssign({}, opts);
-
 	opts.headers = {
 		Accept: 'application/vnd.github.v3+json',
 		Authorization: 'token ' + opts.token,
