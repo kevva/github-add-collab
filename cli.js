@@ -7,7 +7,7 @@ var githubAddCollab = require('./');
 var cli = meow({
 	help: [
 		'Usage',
-		'  $ github-add-collab <user> <repos>',
+		'  $ github-add-collab <user> [repos]',
 		'',
 		'Example',
 		'  $ github-add-collab johndoe github-add-collab yeoman/yo --token 523ef69119',
