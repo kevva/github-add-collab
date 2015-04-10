@@ -5,7 +5,7 @@
 
 ## Install
 
-```bash
+```
 $ npm install --save github-add-collab
 ```
 
@@ -62,11 +62,11 @@ Returns an error if something goes wrong.
 
 ## CLI
 
-```sh
+```
 $ npm install --global github-add-collab
 ```
 
-```sh
+```
 $ github-add-collab --help
 
   Usage
