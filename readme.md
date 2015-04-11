@@ -53,6 +53,12 @@ Type: `boolean`
 
 If no repos are defined and this option is set to `true` it'll add the user to all repositories that the token has access to.
 
+#### options.addToSources
+
+Type: `boolean`
+
+If no repos are defined and this option is set to `true` it'll add the user to all non-forked repositories that the token has access to.
+
 #### callback(err)
 
 Type: `function`
@@ -77,9 +83,10 @@ $ github-add-collab --help
     $ github-add-collab johndoe --add-to-all --token 523ef69119
 
   Options
-    -a, --add-to-all    Add to all repositories
-    -t, --token         Github token to authenticate with
-    -v, --verbose       Show detailed output
+    -a, --add-to-all        Add to all repositories
+    -s, --add-to-sources    Add to source repositories
+    -t, --token             Github token to authenticate with
+    -v, --verbose           Show detailed output
 ```
 
 

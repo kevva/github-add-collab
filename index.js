@@ -42,6 +42,12 @@ function getRepos(user, login, opts, cb) {
 			return;
 		}
 
+		if (opts.addToSources) {
+			data = data.filter(function (el) {
+				return !el.fork;
+			});
+		}
+
 		data = data.map(function (el) {
 			return el.full_name;
 		});
@@ -80,7 +86,7 @@ module.exports = function (user, repos, opts, cb) {
 	githubTokenUser(opts.token, function (err, data) {
 		var username = data.login;
 
-		if (!repos.length && opts.addToAll) {
+		if (!repos.length && (opts.addToAll || opts.addToSources)) {
 			getRepos(user, username, opts, cb);
 			return;
 		}

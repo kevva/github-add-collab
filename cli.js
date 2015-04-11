@@ -14,15 +14,17 @@ var cli = meow({
 		'  $ github-add-collab johndoe --add-to-all --token 523ef69119',
 		'',
 		'Options',
-		'  -a, --add-to-all    Add to all repositories',
-		'  -t, --token         Github token to authenticate with',
-		'  -v, --verbose       Show detailed output'
+		'  -a, --add-to-all        Add to all repositories',
+		'  -s, --add-to-sources    Add to source repositories',
+		'  -t, --token             Github token to authenticate with',
+		'  -v, --verbose           Show detailed output'
 	].join('\n')
 }, {
 	boolean: ['add-to-all', 'verbose'],
 	string: ['token'],
 	alias: {
 		a: 'add-to-all',
+		s: 'add-to-sources',
 		t: 'token',
 		v: 'verbose'
 	}
