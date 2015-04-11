@@ -76,7 +76,7 @@ module.exports = function (user, repos, opts, cb) {
 	}
 
 	if (repos.length && (opts.addToAll || opts.addToSources)) {
-		throw new Error('`addToAll` and `addToSources` can not be used with `repos`');
+		throw new Error('`addToAll` and `addToSources` cannot be used with `repos`');
 	}
 
 	opts = objectAssign({}, opts);
