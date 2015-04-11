@@ -75,6 +75,10 @@ module.exports = function (user, repos, opts, cb) {
 		throw new Error('Token is required to authenticate with Github');
 	}
 
+	if (repos.length && (opts.addToAll || opts.addToSources)) {
+		throw new Error('`addToAll` and `addToSources` can not be used with `repos`');
+	}
+
 	opts = objectAssign({}, opts);
 	opts.headers = {
 		Accept: 'application/vnd.github.v3+json',
