@@ -1,4 +1,4 @@
-# github-add-collab [![Build Status](http://img.shields.io/travis/kevva/github-add-collab.svg?style=flat)](https://travis-ci.org/kevva/github-add-collab)
+# github-add-collab [![Build Status](https://travis-ci.org/kevva/github-add-collab.svg?branch=master)](https://travis-ci.org/kevva/github-add-collab)
 
 > Add collaborators to GitHub repos
 
