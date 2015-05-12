@@ -9,7 +9,10 @@ function run(user, repos, opts, cb) {
 	eachAsync(repos, function (repo, i, next) {
 		var url = 'repos/' + repo + '/collaborators/' + user;
 
-		ghGot.put(url, {token: opts.token}, function (err, data) {
+		ghGot.put(url, {
+			token: opts.token,
+			json: false
+		}, function (err, data) {
 			if (err) {
 				cb(err);
 				return;
