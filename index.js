@@ -1,24 +1,37 @@
 'use strict';
 
+var Configstore = require('configstore');
 var githubRepos = require('github-repositories');
 var githubTokenUser = require('github-token-user');
 var ghGot = require('gh-got');
 var eachAsync = require('each-async');
+var conf = new Configstore('github-add-collab');
 
 function run(user, repos, opts, cb) {
 	eachAsync(repos, function (repo, i, next) {
+		var headers = {};
 		var url = 'repos/' + repo + '/collaborators/' + user;
+		var modified = conf.get(repo);
+
+		if (modified) {
+			headers['if-modified-since'] = modified;
+		}
 
 		ghGot.put(url, {
+			headers: headers,
 			token: opts.token,
 			json: false
-		}, function (err, data) {
+		}, function (err, data, res) {
 			if (err) {
 				cb(err);
 				return;
 			}
 
-			cb();
+			if (res.headers['Last-Modified'] !== modified) {
+				conf.set(repo, res.headers['Last-Modified']);
+			}
+
+			next();
 		});
 	}, function (err) {
 		if (err) {
