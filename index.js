@@ -1,5 +1,4 @@
 'use strict';
-
 var Configstore = require('configstore');
 var githubRepos = require('github-repositories');
 var githubTokenUser = require('github-token-user');
