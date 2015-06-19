@@ -17,7 +17,7 @@ var cli = meow({
 		'  -s, --add-to-sources    Add to source repositories',
 		'  -t, --token             Github token to authenticate with',
 		'  -v, --verbose           Show detailed output'
-	].join('\n')
+	]
 }, {
 	boolean: ['add-to-all', 'verbose'],
 	string: ['token'],
