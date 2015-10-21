@@ -30,11 +30,11 @@
     "repositories"
   ],
   "dependencies": {
-    "each-async": "^1.1.1",
-    "gh-got": "^1.0.2",
-    "github-repositories": "^1.1.0",
-    "github-token-user": "^1.0.0",
-    "meow": "^3.3.0"
+    "gh-got": "^2.1.0",
+    "github-repositories": "^2.1.1",
+    "github-token-user": "^2.0.1",
+    "meow": "^3.3.0",
+    "pinkie-promise": "^1.0.0"
   },
   "devDependencies": {
     "ava": "^0.0.4"

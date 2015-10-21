@@ -2,42 +2,23 @@
 var githubRepos = require('github-repositories');
 var githubTokenUser = require('github-token-user');
 var ghGot = require('gh-got');
-var eachAsync = require('each-async');
+var Promise = require('pinkie-promise');
 
-function run(user, repos, opts, cb) {
-	eachAsync(repos, function (repo, i, next) {
-		var headers = {};
+function run(user, repos, opts) {
+	return Promise.all(repos.map(function (repo) {
 		var url = 'repos/' + repo + '/collaborators/' + user;
 
-		ghGot.put(url, {
-			headers: headers,
+		return ghGot.put(url, {
 			token: opts.token,
 			json: false
-		}, function (err, data, res) {
-			if (err) {
-				cb(err);
-				return;
-			}
-
-			next();
+		}).then(function () {
+			return repo;
 		});
-	}, function (err) {
-		if (err) {
-			cb(err);
-			return;
-		}
-
-		cb(null, repos);
-	});
+	}));
 }
 
-function getRepos(user, login, opts, cb) {
-	githubRepos(login, {token: opts.token}, function (err, data) {
-		if (err) {
-			cb(err);
-			return;
-		}
-
+function getRepos(user, login, opts) {
+	return githubRepos(login, {token: opts.token}).then(function (data) {
 		if (opts.addToSources) {
 			data = data.filter(function (el) {
 				return !el.fork;
@@ -48,45 +29,43 @@ function getRepos(user, login, opts, cb) {
 			return el.full_name;
 		});
 
-		run(user, data, opts, cb);
+		return run(user, data, opts);
 	});
 }
 
-module.exports = function (user, repos, opts, cb) {
+module.exports = function (user, repos, opts) {
 	opts = opts || {};
 
 	if (typeof user !== 'string') {
-		throw new Error('User required');
+		return Promise.reject(new Error('User required'));
 	}
 
-	if (!cb && typeof repos === 'object') {
-		cb = opts;
+	if (typeof repos === 'object' && !Array.isArray(repos)) {
 		opts = repos;
 		repos = [];
 	}
 
 	if (!Array.isArray(repos)) {
-		throw new Error('Expected an array');
+		return Promise.reject(new Error('Expected an array'));
 	}
 
 	if (!opts.token) {
-		throw new Error('Token is required to authenticate with Github');
+		return Promise.reject(new Error('Token is required to authenticate with Github'));
 	}
 
 	if (repos.length && (opts.addToAll || opts.addToSources)) {
-		throw new Error('`addToAll` and `addToSources` cannot be used with `repos`');
+		return Promise.reject(new Error('`addToAll` and `addToSources` cannot be used with `repos`'));
 	}
 
-	githubTokenUser(opts.token, function (err, data) {
+	return githubTokenUser(opts.token).then(function (data) {
 		if (!repos.length && (opts.addToAll || opts.addToSources)) {
-			getRepos(user, data.login, opts, cb);
-			return;
+			return getRepos(user, data.login, opts);
 		}
 
 		repos = repos.map(function (repo) {
 			return repo.split('/')[1] ? repo : data.login + '/' + repo;
 		});
 
-		run(user, repos, opts, cb);
+		return run(user, repos, opts);
 	});
 };

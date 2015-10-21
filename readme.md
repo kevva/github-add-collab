@@ -13,11 +13,11 @@ $ npm install --save github-add-collab
 ## Usage
 
 ```js
-var githubAddCollab = require('github-add-collab');
+const githubAddCollab = require('github-add-collab');
 
 githubAddCollab('johndoe', ['github-add-collab', 'yeoman/yo'], {
 	token: '523ef691191'
-}, function (err, data) {
+}).then(data => {
 	console.log('Successfully added user johndoe to github-add-collab and yeoman/yo');
 });
 ```
@@ -25,7 +25,9 @@ githubAddCollab('johndoe', ['github-add-collab', 'yeoman/yo'], {
 
 ## API
 
-### githubAddCollab(user, [repos], options, callback)
+### githubAddCollab(user, [repos], options)
+
+Returns a promise for an `array`.
 
 #### user
 
@@ -40,30 +42,26 @@ Type: `array`
 
 Repos to add the collaborator to.
 
-#### options.token
+#### options
+
+##### token
 
 *Required*  
 Type: `string`
 
 Token to authenticate with. If you don't have a token you can generate a new one [here](https://github.com/settings/tokens/new).
 
-#### options.addToAll
+##### addToAll
 
 Type: `boolean`
 
 If no repos are defined and this option is set to `true` it'll add the user to all repositories that the token has access to.
 
-#### options.addToSources
+##### addToSources
 
 Type: `boolean`
 
 If no repos are defined and this option is set to `true` it'll add the user to all non-forked repositories that the token has access to.
-
-#### callback(err)
-
-Type: `function`
-
-Returns an error if something goes wrong.
 
 
 ## CLI

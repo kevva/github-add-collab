@@ -37,12 +37,7 @@ if (!user) {
 	process.exit(1);
 }
 
-githubAddCollab(user, repos, cli.flags, function (err, data) {
-	if (err) {
-		console.error(err.message);
-		process.exit(1);
-	}
-
+githubAddCollab(user, repos, cli.flags).then(function (data) {
 	console.log('Added user ' + user + ' to ' + data.length + ' repositories');
 
 	if (cli.flags.verbose) {
