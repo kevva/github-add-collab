@@ -6,7 +6,7 @@ test('add collab to repository', async t => {
 		token: process.env.GITHUB_TOKEN
 	});
 
-	t.ok(data.includes('unicorn/unicorns'));
+	t.ok(data.indexOf('unicorn/unicorns') !== -1);
 });
 
 test('add collab to all repositories', async t => {
@@ -15,8 +15,8 @@ test('add collab to all repositories', async t => {
 		addToAll: true
 	});
 
-	t.ok(data.includes('unicorn/unicorns'));
-	t.ok(data.includes('unicorn/unicorn'));
+	t.ok(data.indexOf('unicorn/unicorns') !== -1);
+	t.ok(data.indexOf('unicorn/unicorn') !== -1);
 });
 
 test('add collab to all source repositories', async t => {
@@ -25,5 +25,5 @@ test('add collab to all source repositories', async t => {
 		addToSources: true
 	});
 
-	t.ok(data.includes('unicorn/unicorns'));
+	t.ok(data.indexOf('unicorn/unicorns') !== -1);
 });
