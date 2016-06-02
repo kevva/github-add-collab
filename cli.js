@@ -1,24 +1,22 @@
 #!/usr/bin/env node
 'use strict';
-var meow = require('meow');
-var githubAddCollab = require('./');
+const meow = require('meow');
+const githubAddCollab = require('./');
 
-var cli = meow({
-	help: [
-		'Usage',
-		'  $ github-add-collab <user> [repos]',
-		'',
-		'Example',
-		'  $ github-add-collab johndoe github-add-collab yeoman/yo --token 523ef69119',
-		'  $ github-add-collab johndoe --add-to-all --token 523ef69119',
-		'',
-		'Options',
-		'  -a, --add-to-all        Add to all repositories',
-		'  -s, --add-to-sources    Add to source repositories',
-		'  -t, --token             Github token to authenticate with',
-		'  -v, --verbose           Show detailed output'
-	]
-}, {
+const cli = meow(`
+	Usage
+	  $ github-add-collab <user> [repos]
+
+	Example
+	  $ github-add-collab johndoe github-add-collab yeoman/yo --token 523ef69119
+	  $ github-add-collab johndoe --add-to-all --token 523ef69119
+
+	Options
+	  -a, --add-to-all      Add to all repositories
+	  -s, --add-to-sources  Add to source repositories
+	  -t, --token           Github token to authenticate with
+	  -v, --verbose         Show detailed output
+`, {
 	boolean: ['add-to-all', 'verbose'],
 	string: ['token'],
 	alias: {
@@ -29,22 +27,22 @@ var cli = meow({
 	}
 });
 
-var user = cli.input.shift();
-var repos = cli.input;
+const user = cli.input.shift();
+const repos = cli.input;
 
 if (!user) {
 	console.error('User required');
 	process.exit(1);
 }
 
-githubAddCollab(user, repos, cli.flags).then(function (data) {
-	console.log('Added user ' + user + ' to ' + data.length + ' repositories');
+githubAddCollab(user, repos, cli.flags).then(data => {
+	console.log(`Added user ${user} to ${data.length} repositories`);
 
 	if (cli.flags.verbose) {
 		console.log();
 
-		data.forEach(function (el) {
-			console.log(el);
+		data.forEach(x => {
+			console.log(x);
 		});
 	}
 });

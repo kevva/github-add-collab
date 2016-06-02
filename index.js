@@ -1,40 +1,31 @@
 'use strict';
-var githubRepos = require('github-repositories');
-var githubTokenUser = require('github-token-user');
-var ghGot = require('gh-got');
-var Promise = require('pinkie-promise');
+const githubRepos = require('github-repositories');
+const githubTokenUser = require('github-token-user');
+const ghGot = require('gh-got');
 
-function run(user, repos, opts) {
-	return Promise.all(repos.map(function (repo) {
-		var url = 'repos/' + repo + '/collaborators/' + user;
+const run = (user, repos, opts) => Promise.all(repos.map(x => {
+	const url = `repos/${x}/collaborators/${user}`;
 
-		return ghGot.put(url, {
-			token: opts.token,
-			json: false
-		}).then(function () {
-			return repo;
-		});
-	}));
-}
+	return ghGot.put(url, {
+		token: opts.token,
+		json: false
+	}).then(() => x);
+}));
 
-function getRepos(user, login, opts) {
-	return githubRepos(login, {token: opts.token}).then(function (data) {
+const getRepos = (user, login, opts) => {
+	return githubRepos(login, {token: opts.token}).then(data => {
 		if (opts.addToSources) {
-			data = data.filter(function (el) {
-				return !el.fork;
-			});
+			data = data.filter(x => !x.fork);
 		}
 
-		data = data.map(function (el) {
-			return el.full_name;
-		});
+		data = data.map(x => x.full_name);
 
 		return run(user, data, opts);
 	});
-}
+};
 
-module.exports = function (user, repos, opts) {
-	opts = opts || {};
+module.exports = (user, repos, opts) => {
+	opts = Object.assign({}, opts);
 
 	if (typeof user !== 'string') {
 		return Promise.reject(new Error('User required'));
@@ -46,25 +37,19 @@ module.exports = function (user, repos, opts) {
 	}
 
 	if (!Array.isArray(repos)) {
-		return Promise.reject(new Error('Expected an array'));
+		return Promise.reject(new TypeError(`Expected an array of repos, got ${typeof repos}`));
 	}
 
-	if (!opts.token) {
-		return Promise.reject(new Error('Token is required to authenticate with Github'));
-	}
-
-	if (repos.length && (opts.addToAll || opts.addToSources)) {
+	if (repos.length > 0 && (opts.addToAll || opts.addToSources)) {
 		return Promise.reject(new Error('`addToAll` and `addToSources` cannot be used with `repos`'));
 	}
 
-	return githubTokenUser(opts.token).then(function (data) {
-		if (!repos.length && (opts.addToAll || opts.addToSources)) {
+	return githubTokenUser(opts.token).then(data => {
+		if (repos.length === 0 && (opts.addToAll || opts.addToSources)) {
 			return getRepos(user, data.login, opts);
 		}
 
-		repos = repos.map(function (repo) {
-			return repo.split('/')[1] ? repo : data.login + '/' + repo;
-		});
+		repos = repos.map(x => x.split('/')[1] ? x : `${data.login}/${x}`);
 
 		return run(user, repos, opts);
 	});
