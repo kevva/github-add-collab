@@ -12,17 +12,13 @@
   "engines": {
     "node": ">=4"
   },
-  "bin": "cli.js",
   "scripts": {
     "test": "xo && ava"
   },
   "files": [
-    "index.js",
-    "cli.js"
+    "index.js"
   ],
   "keywords": [
-    "cli-app",
-    "cli",
     "api",
     "collab",
     "github",

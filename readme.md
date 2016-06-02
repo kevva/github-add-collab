@@ -64,28 +64,9 @@ Type: `boolean`
 If no repos are defined and this option is set to `true` it'll add the user to all non-forked repositories that the token has access to.
 
 
-## CLI
+## Related
 
-```
-$ npm install --global github-add-collab
-```
-
-```
-$ github-add-collab --help
-
-  Usage
-	$ github-add-collab <user> [repos]
-
-  Example
-	$ github-add-collab johndoe github-add-collab yeoman/yo --token 523ef69119
-	$ github-add-collab johndoe --add-to-all --token 523ef69119
-
-  Options
-	-a, --add-to-all      Add to all repositories
-	-s, --add-to-sources  Add to source repositories
-	-t, --token           Github token to authenticate with
-	-v, --verbose         Show detailed output
-```
+* [github-add-collab-cli](https://github.com/kevva/github-add-collab-cli) - CLI for this module
 
 
 ## License
