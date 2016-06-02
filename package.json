@@ -1,6 +1,6 @@
 {
   "name": "github-add-collab",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Add collaborators to Github repos",
   "license": "MIT",
   "repository": "kevva/github-add-collab",
