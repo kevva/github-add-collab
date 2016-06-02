@@ -31,7 +31,7 @@ Returns a promise for an `array`.
 
 #### user
 
-*Required*  
+*Required*<br>
 Type: `string`
 
 Username to add as collaborator.
@@ -46,7 +46,7 @@ Repos to add the collaborator to.
 
 ##### token
 
-*Required*  
+*Required*<br>
 Type: `string`
 
 Token to authenticate with. If you don't have a token you can generate a new one [here](https://github.com/settings/tokens/new).
