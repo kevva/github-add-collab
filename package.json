@@ -28,8 +28,7 @@
   "dependencies": {
     "gh-got": "^4.0.0",
     "github-repositories": "^3.0.0",
-    "github-token-user": "^2.0.1",
-    "meow": "^3.3.0"
+    "github-token-user": "^2.0.1"
   },
   "devDependencies": {
     "ava": "*",
