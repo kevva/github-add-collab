@@ -26,15 +26,13 @@
     "repositories"
   ],
   "dependencies": {
-    "gh-got": "^4.0.0",
+    "gh-got": "^5.0.0",
     "github-repositories": "^3.0.0",
-    "github-token-user": "^2.0.1"
+    "github-token-user": "^3.0.0",
+    "nock": "^9.0.13"
   },
   "devDependencies": {
     "ava": "*",
     "xo": "*"
-  },
-  "xo": {
-    "esnext": true
   }
 }

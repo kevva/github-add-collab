@@ -1,29 +1,29 @@
 import test from 'ava';
-import m from './';
+import m from '.';
 
 test('add collab to repository', async t => {
-	const data = await m('sindresorhus', ['playground'], {
-		token: process.env.GH_TOKEN
+	const [repo] = await m('octocat', ['playground'], {
+		token: process.env.GITHUB_TOKEN
 	});
 
-	t.true(data.indexOf('kevva/playground') !== -1);
+	t.is(repo, 'bRuNoLeVeRmAnZoR/playground');
 });
 
 test('add collab to all repositories', async t => {
-	const data = await m('kevva', {
-		token: process.env.GH_TOKEN,
+	const [download, playground] = await m('octocat', {
+		token: process.env.GITHUB_TOKEN,
 		addToAll: true
 	});
 
-	t.true(data.indexOf('kevva/playground') !== -1);
-	t.true(data.indexOf('kevva/github-add-collab') !== -1);
+	t.is(download, 'bRuNoLeVeRmAnZoR/download');
+	t.is(playground, 'bRuNoLeVeRmAnZoR/playground');
 });
 
 test('add collab to all source repositories', async t => {
-	const data = await m('kevva', {
-		token: process.env.GH_TOKEN,
+	const [repo] = await m('octocat', {
+		token: process.env.GITHUB_TOKEN,
 		addToSources: true
 	});
 
-	t.true(data.indexOf('kevva/playground') !== -1);
+	t.is(repo, 'bRuNoLeVeRmAnZoR/playground');
 });
