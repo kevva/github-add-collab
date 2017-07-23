@@ -1,38 +1,38 @@
 {
-  "name": "github-add-collab",
-  "version": "2.0.2",
-  "description": "Add collaborators to Github repos",
-  "license": "MIT",
-  "repository": "kevva/github-add-collab",
-  "author": {
-    "name": "Kevin Mårtensson",
-    "email": "kevinmartensson@gmail.com",
-    "url": "github.com/kevva"
-  },
-  "engines": {
-    "node": ">=4"
-  },
-  "scripts": {
-    "test": "xo && ava"
-  },
-  "files": [
-    "index.js"
-  ],
-  "keywords": [
-    "api",
-    "collab",
-    "github",
-    "repo",
-    "repositories"
-  ],
-  "dependencies": {
-    "gh-got": "^5.0.0",
-    "github-repositories": "^3.0.0",
-    "github-token-user": "^3.0.0",
-    "nock": "^9.0.13"
-  },
-  "devDependencies": {
-    "ava": "*",
-    "xo": "*"
-  }
+	"name": "github-add-collab",
+	"version": "2.0.2",
+	"description": "Add collaborators to Github repos",
+	"license": "MIT",
+	"repository": "kevva/github-add-collab",
+	"author": {
+		"name": "Kevin Mårtensson",
+		"email": "kevinmartensson@gmail.com",
+		"url": "github.com/kevva"
+	},
+	"engines": {
+		"node": ">=4"
+	},
+	"scripts": {
+		"test": "xo && ava"
+	},
+	"files": [
+		"index.js"
+	],
+	"keywords": [
+		"api",
+		"collab",
+		"github",
+		"repo",
+		"repositories"
+	],
+	"dependencies": {
+		"gh-got": "^6.0.0",
+		"github-repositories": "^3.0.0",
+		"github-token-user": "^3.0.0",
+		"nock": "^9.0.13"
+	},
+	"devDependencies": {
+		"ava": "*",
+		"xo": "*"
+	}
 }

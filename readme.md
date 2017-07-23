@@ -6,7 +6,7 @@
 ## Install
 
 ```
-$ npm install --save github-add-collab
+$ npm install github-add-collab
 ```
 
 
@@ -38,7 +38,7 @@ Username to add as collaborator.
 
 #### repos
 
-Type: `array`
+Type: `Array`
 
 Repos to add the collaborator to.
 

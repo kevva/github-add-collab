@@ -37,7 +37,7 @@ module.exports = (user, repos, opts) => {
 	}
 
 	if (!Array.isArray(repos)) {
-		return Promise.reject(new TypeError(`Expected an array of repos, got ${typeof repos}`));
+		return Promise.reject(new TypeError(`Expected an \`Array\` of repos, got \`${typeof repos}\``));
 	}
 
 	if (repos.length > 0 && (opts.addToAll || opts.addToSources)) {
